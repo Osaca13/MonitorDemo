@@ -14,6 +14,8 @@ builder.Services.AddApplicationInsightsTelemetry(Options =>
 
 var app = builder.Build();
 
+app.MapGet("/", () => "Hello World!");
+
 app.MapGet("/weatherforecast", () =>
 {
     var summaries = new[]
@@ -31,6 +33,7 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 }).WithName("GetWeatherForecast");
 
+app.UseHttpsRedirection();
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
